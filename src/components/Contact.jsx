@@ -2,9 +2,10 @@ import Reveal from './Reveal.jsx';
 import { openWhatsApp } from '../utils.js';
 import { CONTACT, MAPS_URL } from '../data.js';
 import { CaptionRule, Lotus } from './Ornaments.jsx';
+import MapEmbed from './MapEmbed.jsx';
 
-// Contact details + the premium address / directions card (no map iframe;
-// "Get Directions" opens a Google Maps search built from the exact address).
+// Contact: details + arch-shaped Address card; a full-width Google Maps embed
+// row ("Find Us on the Map") sits below the two-column grid.
 export default function Contact() {
   return (
     <section id="contact" className="band band--cream">
@@ -61,6 +62,10 @@ export default function Contact() {
             </div>
           </div>
         </Reveal>
+      </div>
+
+      <div className="container-x">
+        <MapEmbed />
       </div>
     </section>
   );
