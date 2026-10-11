@@ -14,8 +14,18 @@ export function openWhatsApp(text) {
   const url = text
     ? `https://wa.me/${BUSINESS_WHATSAPP}?text=${encodeURIComponent(text)}`
     : `https://wa.me/${BUSINESS_WHATSAPP}`;
-  const win = window.open(url, '_blank', 'noopener,noreferrer');
-  if (win === null) window.location.assign(url);
+  // Programmatically click a disconnected <a target="_blank"> instead of
+  // calling window.open directly. Passing noopener/noreferrer features to
+  // window.open makes it return null even on a *successful* open (because
+  // noopener severs the handle), which would then falsely trip a current-tab
+  // redirect fallback — the double-navigation bug this replaces.
+  // The anchor-click path gets the browser's native new-tab handling with
+  // the same security attributes.
+  const a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  a.click();
 }
 
 // Reproduces the original enquiry message template byte-for-byte.

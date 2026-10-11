@@ -3,7 +3,7 @@ import { img } from '../utils.js';
 // Hero overlay values preserved EXACTLY per the brief:
 //  - linear:  bg-gradient-to-b from-charcoal/10 via-transparent to-charcoal/25
 //  - radial:  rgba(0,0,0,0.32) -> rgba(0,0,0,0.52) at 58% -> transparent
-//  - image:   object-cover object-center, opacity-100, fetchpriority=high, eager (not lazy)
+//  - image:   object-cover object-center, opacity-100, fetchPriority=high, eager (not lazy)
 export default function Hero() {
   return (
     <section id="top" className="hero-full relative flex items-center justify-center overflow-hidden">
@@ -12,7 +12,7 @@ export default function Hero() {
           src={img('hero-wedding-stage.webp')}
           alt="Tirumala Marriage Function Hall"
           className="w-full h-full object-cover object-center opacity-100"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/10 via-transparent to-charcoal/25" />
         <div
