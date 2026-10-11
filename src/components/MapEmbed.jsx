@@ -1,11 +1,12 @@
 import Reveal from './Reveal.jsx';
-import { CONTACT, MAPS_URL } from '../data.js';
+import { MAPS_URL, MAPS_EMBED_URL } from '../data.js';
 import { CaptionRule } from './Ornaments.jsx';
 
-// Keyless Google Maps embed — reads the business from CONTACT.mapsQuery.
+// Keyless Google Maps embed pinned to the business's Google Business Profile
+// coordinates (see GEO/MAPS_EMBED_URL in data.js).
 // Rendered in its own full-width row below the Contact two-column grid.
 export default function MapEmbed() {
-  const src = `https://www.google.com/maps?q=${encodeURIComponent(CONTACT.mapsQuery)}&output=embed`;
+  const src = MAPS_EMBED_URL;
   return (
     <Reveal className="map-row">
       <div className="map-head">

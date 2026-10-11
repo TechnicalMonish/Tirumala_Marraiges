@@ -47,7 +47,19 @@ export const CONTACT = {
   addressLines: ['D.No. 6-8-1093/A 3rd Floor,', 'NGOs Colony, KT Road', 'Near Nandhi Circle, Tirupati,', 'Andhra Pradesh - 517501,', 'India.'],
   mapsQuery: 'Tirumala Marriage Service & Suppliers, D.No. 6-8-1093/A, 3rd Floor, NGOs Colony, KT Road, Near Nandhi Circle, Tirupati, Andhra Pradesh 517501, India',
 };
-export const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT.mapsQuery)}`;
+
+// Google Business Profile location (from the user's maps.app.goo.gl short link).
+// Exact coordinates of the listing — far more precise than an address-text search.
+export const GEO = { lat: 13.652572, lng: 79.4197161 };
+
+// Short link to the Google Business listing. Used for "Get Directions".
+export const MAPS_URL = 'https://maps.app.goo.gl/uCBzdT8RkYt5GNaa9';
+
+// Keyless embed pinned to the business's exact coordinates (with the business
+// name as the marker label) so the map centres on the Google Business pin.
+export const MAPS_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(
+  `Tirumala Marriage Service & Suppliers@${GEO.lat},${GEO.lng}`
+)}&ll=${GEO.lat},${GEO.lng}&z=16&output=embed`;
 
 export const SERVICES = [
   { icon: 'fa-hotel',          title: 'Venue & Stay',       desc: 'Function Hall Booking & Accommodation Arrangements for you and your guests.' },
