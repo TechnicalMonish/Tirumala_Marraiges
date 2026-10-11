@@ -4,7 +4,7 @@
 export const img = (name) => `${import.meta.env.BASE_URL}images/${name}`;
 
 // WhatsApp business number — kept byte-identical with the original index.html.
-export const BUSINESS_WHATSAPP = '919010015899';
+export const BUSINESS_WHATSAPP = '917013099397';
 
 export function openWhatsApp(text) {
   if (!BUSINESS_WHATSAPP) {
