@@ -38,7 +38,7 @@ export default function Contact() {
                   <h4 className="font-bold text-lg text-charcoal mb-1">Contact</h4>
                   <p className="text-gray-500 text-sm leading-relaxed" id="business-phone">
                     <span className="font-medium text-charcoal">Proprietor:</span> Rajagopal Taliyakula<br />
-                    <a href="tel:+919885670534" className="hover:text-[#856611] transition">Mobile: +91 9885670534</a><br />
+                    <a href="tel:+919010015899" className="hover:text-[#856611] transition">Mobile: +91 9010015899</a><br />
                     <a href="mailto:tirumala.marriage1991@gmail.com" className="hover:text-[#856611] transition break-all">
                       Email: tirumala.marriage1991@gmail.com
                     </a>
@@ -49,7 +49,7 @@ export default function Contact() {
 
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
               <a
-                href="tel:+919885670534"
+                href="tel:+919010015899"
                 className="w-full sm:w-auto inline-flex justify-center items-center bg-charcoal text-white px-8 py-3.5 rounded-full hover:bg-gold hover:text-charcoal transition duration-300 text-[15px] font-semibold shadow-md min-h-[48px]"
               >
                 <i className="fas fa-phone mr-2" aria-hidden="true" /> Call Now
