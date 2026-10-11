@@ -1,0 +1,53 @@
+/* ── Contact ───────────────────────────────────────────── */
+.contact-grid { display: grid; gap: 56px; align-items: center; }
+@media (min-width: 1024px) { .contact-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(56px, 6vw, 96px); } }
+.contact-block { margin-top: 40px; }
+.contact-block__title { color: var(--kumkum); }
+.contact-list { margin-top: 18px; display: grid; gap: 10px; }
+.contact-row { display: flex; align-items: center; gap: 16px; min-height: 52px; font-size: 16.5px; }
+.contact-row .niche { width: 38px; height: 44px; }
+.contact-row .niche i { font-size: 14px; margin-top: 6px; }
+.contact-row a { color: var(--charcoal); text-decoration: none; padding-block: 8px; overflow-wrap: anywhere; }
+.contact-row a:hover { color: var(--kumkum); text-decoration: underline; text-decoration-color: var(--gold); }
+.contact-row__role { font-weight: 600; color: var(--kumkum); letter-spacing: .02em; }
+.contact-actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 12px 14px; }
+@media (max-width: 479px) { .contact-actions .btn { width: 100%; } }
+
+.address-wrap { width: min(100%, 470px); margin-inline: auto; }
+.address-card {
+  position: relative; text-align: center; background: var(--kumkum); color: var(--cream);
+  padding: clamp(92px, 11vw, 124px) clamp(22px, 4vw, 44px) clamp(40px, 5vw, 52px);
+  border-radius: 9999px 9999px 10px 10px; box-shadow: 0 34px 60px -36px rgb(42 7 11 / .75);
+}
+.address-card .lotus-mark { width: 30px; height: 18px; margin: 0 auto; color: var(--gold-light); }
+.address-card__title { margin-top: 14px; color: var(--gold-light); }
+.address-card address { margin-top: 16px; font-style: normal; font-family: var(--font-display); font-size: clamp(1.12rem, 1rem + .55vw, 1.38rem); line-height: 1.6; }
+.address-card .btn { margin-top: 30px; }
+
+/* ── Footer ────────────────────────────────────────────── */
+.site-footer { background: var(--kumkum-ink); color: rgb(253 251 247 / .74); }
+.footer-grid { display: grid; gap: 44px; padding-block: clamp(56px, 7vw, 96px) clamp(36px, 4vw, 56px); }
+@media (min-width: 768px) { .footer-grid { grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 48px; } }
+.site-footer .wordmark__name { color: #E8DCC0; font-size: 26px; }
+.site-footer .wordmark__sub { color: rgb(253 251 247 / .7); opacity: 1; }
+.footer-desc { margin-top: 22px; max-width: 32rem; font-size: 15px; line-height: 1.75; }
+.footer-tagline { margin-top: 18px; max-width: 32rem; font-family: var(--font-display); font-style: italic; font-size: 1.08rem; line-height: 1.45; color: var(--gold-light); }
+.footer-h { margin-bottom: 10px; color: var(--gold-light); }
+.footer-links a, .footer-links button {
+  display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; text-align: left;
+  color: rgb(253 251 247 / .74); text-decoration: none; transition: color .2s;
+}
+.footer-links a:hover, .footer-links button:hover { color: var(--cream); text-decoration: underline; text-decoration-color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgb(212 175 55 / .22); padding: 22px 0 96px; font-size: 13.5px; text-align: center; color: rgb(253 251 247 / .68); }
+@media (min-width: 768px) { .footer-bottom { padding-bottom: 28px; text-align: left; } }
+
+/* ── WhatsApp FAB ──────────────────────────────────────── */
+.whatsapp-fab {
+  position: fixed; z-index: 49; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 999px;
+  bottom: calc(22px + env(safe-area-inset-bottom, 0px)); right: calc(18px + env(safe-area-inset-right, 0px));
+  background: var(--whatsapp); color: var(--charcoal); font-size: 26px;
+  box-shadow: 0 16px 32px -14px rgb(16 60 32 / .6); transition: transform .35s var(--ease-out), box-shadow .35s;
+}
+.whatsapp-fab::before { content: ""; position: absolute; inset: -5px; border-radius: 999px; border: 1px solid rgb(212 175 55 / .85); pointer-events: none; }
+@media (min-width: 768px) { .whatsapp-fab { width: 58px; height: 58px; bottom: 32px; right: 32px; font-size: 30px; } }
+@media (hover: hover) { .whatsapp-fab:hover { transform: translateY(-2px); box-shadow: 0 20px 36px -14px rgb(16 60 32 / .7); } }

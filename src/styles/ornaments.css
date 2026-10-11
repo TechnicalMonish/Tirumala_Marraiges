@@ -1,0 +1,44 @@
+/* ── Zari temple band (Kanchipuram border) ─────────────── */
+.zari {
+  height: 14px; width: 100%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='14' viewBox='0 0 20 14'%3E%3Cpath d='M3 12.5L10 4.6L17 12.5Z' fill='%23D4AF37'/%3E%3Cpath d='M6.6 12.5L10 8.7L13.4 12.5Z' fill='%235B0E16'/%3E%3Ccircle cx='10' cy='2.5' r='1.15' fill='%23D4AF37'/%3E%3C/svg%3E") repeat-x center / 20px 14px, var(--kumkum);
+  box-shadow: inset 0 1px 0 var(--gold), inset 0 -1px 0 var(--gold);
+}
+@media (max-width: 639px) { .zari { height: 12px; background-size: 17px 12px, auto; } }
+
+/* ── Lotus caption rule (carries the section labels) ───── */
+.caption-rule { display: flex; align-items: center; gap: 12px; margin: 0; color: var(--gold-readable); }
+.caption-rule--center { justify-content: center; text-align: center; }
+.caption-rule__line { flex: 0 1 64px; min-width: 14px; height: 1px; background: currentColor; opacity: .5; }
+.caption-rule__lotus { flex: none; width: 20px; height: 12px; color: var(--gold); }
+.caption-rule__label { min-width: 0; }
+.caption-rule--dark { color: var(--gold-light); }
+.caption-rule--dark .caption-rule__lotus { color: var(--gold-light); }
+
+.lotus-divider { display: flex; align-items: center; justify-content: center; gap: 14px; color: var(--gold-light); }
+.lotus-divider span { width: clamp(40px, 8vw, 88px); height: 1px; background: currentColor; opacity: .7; }
+.lotus-divider svg { width: 26px; height: 15px; }
+
+/* ── Prabhavali arch frame ─────────────────────────────── */
+.arch-frame { position: relative; margin: 26px; }
+.arch-frame::before, .arch-frame::after {
+  content: ""; position: absolute; pointer-events: none; border-radius: 9999px 9999px 0 0;
+  transition: opacity .9s var(--ease-out) .45s;
+}
+.arch-frame::before { inset: -12px -12px 0 -12px; border: solid var(--gold); border-width: 1px 1px 0 1px; }
+.arch-frame::after { inset: -24px -24px 0 -24px; border: dotted rgb(212 175 55 / .8); border-width: 2px 2px 0 2px; }
+.arch-frame--dark::before { border-color: var(--gold-light); }
+.arch-frame--dark::after { border-color: rgb(241 215 124 / .6); }
+.arch-media { position: relative; overflow: hidden; border-radius: 9999px 9999px 4px 4px; background: var(--sand); }
+.arch-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Arch niche that holds an icon */
+.niche {
+  flex: none; display: grid; place-items: center; width: 44px; height: 52px;
+  border: 1px solid currentColor; border-radius: 999px 999px 3px 3px; color: var(--gold-readable);
+  transition: background-color .3s var(--ease-out), color .3s var(--ease-out), border-color .3s;
+}
+.niche i { font-size: 17px; margin-top: 7px; }
+.niche--dark { color: var(--gold-light); }
+
+.kolam { color: var(--gold); }

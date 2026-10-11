@@ -1,0 +1,47 @@
+/* ── Hero darshan reveal (the one authored moment) ─────── */
+@keyframes heroSettle { from { transform: scale(1.06); } to { transform: scale(1); } }
+@keyframes archRise { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeLift { from { opacity: 0; transform: translateY(18px); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes ruleGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.hero__img { animation: heroSettle 1.8s var(--ease-out) both; }
+.hero-lockup::before { animation: archRise 1.4s var(--ease-out) .15s both; }
+.hero-lockup::after { animation: fadeIn 1.2s ease .9s both; }
+.hero__line-1 { animation: fadeLift 1s var(--ease-out) .3s both; }
+.hero__line-2 { animation: fadeLift 1s var(--ease-out) .42s both; }
+.hero__caption { animation: fadeIn .9s ease .6s both; }
+.hero__caption .caption-rule__line { animation: ruleGrow 1.1s var(--ease-out) .6s both; }
+.hero__lede { animation: fadeLift 1s var(--ease-out) .7s both; }
+.hero__actions { animation: fadeLift 1s var(--ease-out) .82s both; }
+
+/* ── Scroll reveal (useReveal adds .active) ────────────── */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+.reveal.active { opacity: 1; transform: none; }
+/* Arch unveil: the frame stays, the photo rises from its base, then the halo appears */
+.reveal.reveal-arch { opacity: 1; transform: none; }
+.reveal-arch .arch-media { clip-path: inset(100% 0 0 0); transition: clip-path 1.3s var(--ease-out) .05s; }
+.reveal-arch.active .arch-media { clip-path: inset(0 0 0 0); }
+.reveal-arch .arch-frame::before, .reveal-arch .arch-frame::after { opacity: 0; }
+.reveal-arch.active .arch-frame::before, .reveal-arch.active .arch-frame::after { opacity: 1; }
+.reveal-arch .seal { opacity: 0; transform: translate(-50%, 12px) scale(.94); transition: opacity .8s var(--ease-out) .8s, transform .9s var(--ease-out) .8s; }
+.reveal-arch.active .seal { opacity: 1; transform: translateX(-50%); }
+
+/* ── Reduced motion: nothing moves, everything is shown ── */
+@media (prefers-reduced-motion: reduce) {
+  html, html.scroll-smooth { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important; transition-delay: 0s !important;
+  }
+  .reveal, .reveal.active { opacity: 1 !important; transform: none !important; }
+  .reveal-arch .arch-media { clip-path: none !important; }
+  .reveal-arch .arch-frame::before, .reveal-arch .arch-frame::after { opacity: 1 !important; }
+  .reveal-arch .seal { opacity: 1 !important; transform: translateX(-50%) !important; }
+  .hero__img { animation: none !important; transform: none !important; }
+  .hero-lockup::before, .hero-lockup::after { animation: none !important; clip-path: none !important; opacity: 1 !important; }
+  .hero__line-1, .hero__line-2, .hero__caption, .hero__lede, .hero__actions {
+    animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important;
+  }
+  .hero__caption .caption-rule__line { animation: none !important; transform: none !important; }
+  .btn:hover, .whatsapp-fab:hover, .occasion:hover .occasion__media img, .tile:hover img { transform: none !important; }
+}

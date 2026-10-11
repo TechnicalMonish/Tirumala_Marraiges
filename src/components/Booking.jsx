@@ -3,24 +3,59 @@ import Reveal from './Reveal.jsx';
 import { EVENT_TYPES, SERVICE_OPTIONS } from '../data.js';
 import { useMediaQuery } from '../hooks.js';
 import { useOverlayLock } from '../OverlayContext.jsx';
-import { buildEnquiryMessage, openWhatsApp, img, cn, BUSINESS_WHATSAPP } from '../utils.js';
+import { buildEnquiryMessage, openWhatsApp, cn, BUSINESS_WHATSAPP } from '../utils.js';
+import { CaptionRule, Lotus, ZariBand } from './Ornaments.jsx';
 
 const EMPTY = { name: '', mobile: '', eventType: 'Wedding', eventDate: '', location: '', guests: '', details: '' };
+const PROMISES = ['Quick Responses', 'Transparent Pricing', 'Dedicated Support'];
+
+// Inline validation rules (name required; mobile exactly 10 digits).
+function validate(f) {
+  const errs = {};
+  if (!f.name.trim()) errs.name = 'Please enter your full name.';
+  if (!/^[0-9]{10}$/.test(f.mobile.trim())) errs.mobile = 'Enter a 10-digit mobile number.';
+  return errs;
+}
+
+function Field({ id, label, required, error, children }) {
+  return (
+    <div className="field">
+      <label htmlFor={id} className="field__label">
+        {label}
+        {required && <span className="req" aria-hidden="true"> *</span>}
+      </label>
+      {children}
+      {error && (
+        <p id={`${id}-error`} className="field__error">
+          <i className="fas fa-circle-exclamation" aria-hidden="true" />
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
 
 export default function Booking() {
   const [form, setForm] = useState(EMPTY);
+  const [errors, setErrors] = useState({});
+  const [attempted, setAttempted] = useState(false);
   const [confirmed, setConfirmed] = useState(new Set()); // committed service selections
   const [sheetOpen, setSheetOpen] = useState(false);
   const [draft, setDraft] = useState(new Set());         // sheet-only draft before Done
   const [fallbackVisible, setFallbackVisible] = useState(false);
-  const sheetRef = useRef(null);
-  const triggerRef = useRef(null);
+  const nameRef = useRef(null);
+  const mobileRef = useRef(null);
   const sheetCloseRef = useRef(null);
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
   useOverlayLock(sheetOpen);
 
-  const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
+  // After the first submit attempt, fields re-validate as the user types.
+  const set = (key) => (e) => {
+    const nextForm = { ...form, [key]: e.target.value };
+    setForm(nextForm);
+    if (attempted) setErrors(validate(nextForm));
+  };
 
   // Desktop checkbox toggles sync with `confirmed`.
   const toggleConfirmed = (value) => () => {
@@ -70,18 +105,14 @@ export default function Booking() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setAttempted(true);
+    const errs = validate(form);
+    setErrors(errs);
+    // Focus the first invalid field (inline errors are linked via aria-describedby).
+    if (errs.name) { nameRef.current?.focus(); return; }
+    if (errs.mobile) { mobileRef.current?.focus(); return; }
     const name = form.name.trim();
     const mobile = form.mobile.trim();
-    if (!name) {
-      // native required will catch empty, but trim-check anyway
-      document.getElementById('name')?.focus();
-      return;
-    }
-    if (!/^[0-9]{10}$/.test(mobile)) {
-      document.getElementById('mobile')?.focus();
-      return;
-    }
-    // Merge desktop checkboxes + mobile confirmed (same set, but future-proof).
     const services = Array.from(confirmed);
     const message = buildEnquiryMessage({
       name,
@@ -110,141 +141,116 @@ export default function Booking() {
         ? '1 service selected'
         : `${confirmed.size} services selected`;
 
+  const invalidProps = (key) =>
+    errors[key] ? { 'aria-invalid': 'true', 'aria-describedby': `${key}-error` } : {};
+
   return (
-    <section id="booking" className="py-10 lg:py-24 bg-cream border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Reveal className="bg-white rounded-2xl lg:rounded-3xl shadow-elegant overflow-hidden flex flex-col lg:flex-row border border-gray-100 booking-inner">
-          <div className="lg:w-2/5 relative bg-charcoal text-white p-7 md:p-10 flex flex-col justify-center booking-info">
-            <div
-              className="absolute inset-0 z-0 opacity-20 bg-cover bg-center"
-              style={{ backgroundImage: `url('${img('venue-interior.webp')}')` }}
-            />
-            <div className="relative z-10">
-              <span className="text-[#F1D77C] tracking-widest text-xs font-semibold uppercase">Start Planning</span>
-              <h3 className="font-bold text-2xl md:text-4xl mt-2 mb-3">Let's Plan Your Perfect Celebration</h3>
-              <p className="text-gray-300 font-light mb-6 text-sm leading-relaxed">
-                Fill out the enquiry form with your event details. We provide complete wedding and event arrangements tailored to your unique requirements and budget.
-              </p>
-              <div className="space-y-4 text-sm">
-                <p className="flex items-center"><i className="fas fa-check text-gold mr-3" aria-hidden="true" /> Quick Responses</p>
-                <p className="flex items-center"><i className="fas fa-check text-gold mr-3" aria-hidden="true" /> Transparent Pricing</p>
-                <p className="flex items-center"><i className="fas fa-check text-gold mr-3" aria-hidden="true" /> Dedicated Support</p>
-              </div>
-            </div>
+    <section id="booking" className="band band--ivory">
+      <div className="container-x">
+        <Reveal className="invite">
+          <div className="invite__panel on-dark">
+            <ZariBand />
+            <h2 className="invite__title h-display">Let's Plan Your Perfect Celebration</h2>
+            <CaptionRule label="Start Planning" align="start" tone="dark" />
+            <p className="invite__copy">
+              Fill out the enquiry form with your event details. We provide complete wedding and event arrangements tailored to your unique requirements and budget.
+            </p>
+            <ul className="promises">
+              {PROMISES.map((p) => (
+                <li key={p}><Lotus />{p}</li>
+              ))}
+            </ul>
           </div>
 
-          <div className="lg:w-3/5 p-5 md:p-10 lg:p-14 booking-form-wrap">
-            <form id="enquiryForm" noValidate onSubmit={onSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 form-grid-2">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+          <div className="invite__form">
+            <form id="enquiryForm" noValidate onSubmit={onSubmit} className="form-stack">
+              <div className="form-row">
+                <Field id="name" label="Full Name" required error={errors.name}>
                   <input
-                    id="name" type="text" required autoComplete="name"
-                    value={form.name} onChange={set('name')}
-                    className="w-full border border-gray-300 rounded-lg py-3 px-4 bg-gray-50 text-base min-h-[48px] focus:ring-2 focus:ring-gold focus:border-gold outline-none"
+                    ref={nameRef} id="name" type="text" required autoComplete="name"
+                    value={form.name} onChange={set('name')} className="field__control" {...invalidProps('name')}
                   />
-                </div>
-                <div>
-                  <label htmlFor="mobile" className="block text-sm font-medium text-gray-700 mb-1">Mobile Number (10 digits) *</label>
+                </Field>
+                <Field id="mobile" label="Mobile Number (10 digits)" required error={errors.mobile}>
                   <input
-                    id="mobile" type="tel" required pattern="[0-9]{10}" inputMode="numeric" autoComplete="tel-national" maxLength={10}
-                    value={form.mobile} onChange={set('mobile')}
-                    className="w-full border border-gray-300 rounded-lg py-3 px-4 bg-gray-50 text-base min-h-[48px] focus:ring-2 focus:ring-gold focus:border-gold outline-none"
+                    ref={mobileRef} id="mobile" type="tel" required pattern="[0-9]{10}" inputMode="numeric"
+                    autoComplete="tel-national" maxLength={10}
+                    value={form.mobile} onChange={set('mobile')} className="field__control" {...invalidProps('mobile')}
                   />
-                </div>
+                </Field>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 form-grid-2">
-                <div>
-                  <label htmlFor="eventType" className="block text-sm font-medium text-gray-700 mb-1">Event Type</label>
-                  <select
-                    id="eventType" value={form.eventType} onChange={set('eventType')}
-                    className="w-full border border-gray-300 rounded-lg py-3 px-4 bg-gray-50 text-base min-h-[48px] focus:ring-2 focus:ring-gold focus:border-gold outline-none text-gray-600"
-                  >
+              <div className="form-row">
+                <Field id="eventType" label="Event Type">
+                  <select id="eventType" value={form.eventType} onChange={set('eventType')} className="field__control">
                     {EVENT_TYPES.map((et) => <option key={et.value} value={et.value}>{et.label}</option>)}
                   </select>
-                </div>
-                <div>
-                  <label htmlFor="eventDate" className="block text-sm font-medium text-gray-700 mb-1">Event Date</label>
-                  <input
-                    id="eventDate" type="date" value={form.eventDate} onChange={set('eventDate')}
-                    className="w-full border border-gray-300 rounded-lg py-3 px-4 bg-gray-50 text-base min-h-[48px] focus:ring-2 focus:ring-gold focus:border-gold outline-none text-gray-600"
-                  />
-                </div>
+                </Field>
+                <Field id="eventDate" label="Event Date">
+                  <input id="eventDate" type="date" value={form.eventDate} onChange={set('eventDate')} className="field__control" />
+                </Field>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 form-grid-2">
-                <div>
-                  <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">Event Location</label>
+              <div className="form-row">
+                <Field id="location" label="Event Location">
                   <input
                     id="location" type="text" placeholder="e.g. Tirupati"
-                    value={form.location} onChange={set('location')}
-                    className="w-full border border-gray-300 rounded-lg py-3 px-4 bg-gray-50 text-base min-h-[48px] focus:ring-2 focus:ring-gold focus:border-gold outline-none"
+                    value={form.location} onChange={set('location')} className="field__control"
                   />
-                </div>
-                <div>
-                  <label htmlFor="guests" className="block text-sm font-medium text-gray-700 mb-1">Expected Guest Count</label>
+                </Field>
+                <Field id="guests" label="Expected Guest Count">
                   <input
                     id="guests" type="number" placeholder="e.g. 500"
-                    value={form.guests} onChange={set('guests')}
-                    className="w-full border border-gray-300 rounded-lg py-3 px-4 bg-gray-50 text-base min-h-[48px] focus:ring-2 focus:ring-gold focus:border-gold outline-none"
+                    value={form.guests} onChange={set('guests')} className="field__control"
                   />
-                </div>
+                </Field>
               </div>
 
-              {/* Services Required */}
-              <div id="services-field">
-                <label className="block text-sm font-medium text-gray-700 mb-1" id="services-label">Services Required</label>
+              {/* Services Required — one selection state for both views */}
+              <div id="services-field" className="field" role="group" aria-labelledby="services-label">
+                <span className="field__label" id="services-label">Services Required</span>
 
                 {/* Mobile compact trigger (shown via CSS <768px) */}
                 <button
-                  ref={triggerRef}
                   type="button"
                   id="services-trigger"
                   aria-haspopup="dialog"
                   aria-expanded={sheetOpen ? 'true' : 'false'}
-                  aria-labelledby="services-label"
+                  aria-labelledby="services-label services-trigger-text"
                   onClick={() => { if (!isDesktop) openSheet(); }}
-                  style={confirmed.size === 0 ? undefined : { color: '#2C2C2C' }}
+                  className={confirmed.size ? 'has-value' : undefined}
                 >
                   <span id="services-trigger-text">{triggerText}</span>
-                  <i className="fas fa-chevron-down text-gray-400 text-sm ml-2 flex-shrink-0" aria-hidden="true" />
+                  <i className="fas fa-chevron-down" aria-hidden="true" />
                 </button>
 
-                {/* Desktop checkboxes */}
-                <div className="hidden md:grid md:grid-cols-2 gap-2 text-sm text-gray-600 mt-2" id="servicesCheckboxes">
+                {/* Desktop option tiles */}
+                <div className="svc-grid" id="servicesCheckboxes">
                   {SERVICE_OPTIONS.map((s) => (
-                    <label key={s.value} className="flex items-center gap-2 py-1 cursor-pointer">
+                    <label key={s.value} className="svc-option">
                       <input
                         type="checkbox"
                         value={s.value}
                         checked={confirmed.has(s.value)}
                         onChange={toggleConfirmed(s.value)}
-                        className="accent-gold rounded w-4 h-4"
-                      /> {s.short}
+                      />
+                      {s.short}
                     </label>
                   ))}
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="details" className="block text-sm font-medium text-gray-700 mb-1">Additional Requirements &amp; Budget (Optional)</label>
-                <textarea
-                  id="details" rows="3" value={form.details} onChange={set('details')}
-                  className="w-full border border-gray-300 rounded-lg py-3 px-4 bg-gray-50 text-base min-h-[48px] focus:ring-2 focus:ring-gold focus:border-gold outline-none"
-                />
-              </div>
+              <Field id="details" label="Additional Requirements & Budget (Optional)">
+                <textarea id="details" rows="3" value={form.details} onChange={set('details')} className="field__control" />
+              </Field>
 
-              <button
-                type="submit"
-                className="w-full bg-gold text-charcoal font-medium py-4 rounded-lg shadow-md hover:bg-opacity-90 transition flex justify-center items-center"
-              >
-                <i className="fab fa-whatsapp text-xl mr-2" aria-hidden="true" /> Send Enquiry on WhatsApp
+              <button type="submit" className="btn btn--kumkum btn--block form-submit">
+                <i className="fab fa-whatsapp" aria-hidden="true" /> Send Enquiry on WhatsApp
               </button>
               <p
                 id="fallback-msg"
                 role="status"
-                className={cn('text-xs text-center text-red-500 mt-2', !fallbackVisible && 'hidden')}
+                className={cn('text-sm text-center text-[#B42318]', !fallbackVisible && 'hidden')}
               >
                 WhatsApp integration is pending. Details copied to clipboard.
               </p>
@@ -253,7 +259,7 @@ export default function Booking() {
         </Reveal>
       </div>
 
-      {/* Services bottom sheet */}
+      {/* Services bottom sheet (mobile) — hidden + inert while closed */}
       <div
         id="services-sheet-backdrop"
         role="presentation"
@@ -267,45 +273,26 @@ export default function Booking() {
         aria-modal={sheetOpen ? 'true' : 'false'}
         aria-hidden={sheetOpen ? 'false' : 'true'}
         aria-labelledby="sheet-title"
-        ref={sheetRef}
         className={sheetOpen ? 'open' : ''}
+        {...(sheetOpen ? {} : { inert: '' })}
       >
         <div className="sheet-drag-handle" aria-hidden="true" />
-        <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
-          <h3 id="sheet-title" className="font-bold text-base text-charcoal">Select Services</h3>
-          <button
-            ref={sheetCloseRef}
-            type="button"
-            onClick={() => closeSheet(false)}
-            className="text-gray-500 hover:text-[#856611] text-xl w-9 h-9 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gold rounded"
-            aria-label="Close services panel"
-          >
-            &times;
+        <div className="sheet-head">
+          <h3 id="sheet-title">Select Services</h3>
+          <button ref={sheetCloseRef} type="button" onClick={() => closeSheet(false)} className="sheet-close" aria-label="Close services panel">
+            <i className="fas fa-xmark" aria-hidden="true" />
           </button>
         </div>
         <div id="sheet-service-list" role="group" aria-labelledby="sheet-title">
           {SERVICE_OPTIONS.map((s, i) => (
             <label key={s.value} className="sheet-service-item" htmlFor={`sht-${i}`}>
-              <input
-                id={`sht-${i}`}
-                type="checkbox"
-                value={s.value}
-                checked={draft.has(s.value)}
-                onChange={toggleDraft(s.value)}
-              />
+              <input id={`sht-${i}`} type="checkbox" value={s.value} checked={draft.has(s.value)} onChange={toggleDraft(s.value)} />
               <span>{s.long}</span>
             </label>
           ))}
         </div>
-        <div
-          className="px-5 py-4 border-t border-gray-100 flex-shrink-0"
-          style={{ paddingBottom: 'max(16px,env(safe-area-inset-bottom,16px))' }}
-        >
-          <button
-            type="button"
-            onClick={() => closeSheet(true)}
-            className="w-full bg-gold text-charcoal font-semibold py-3 rounded-lg text-base min-h-[48px] hover:bg-opacity-90 transition"
-          >
+        <div className="sheet-foot">
+          <button type="button" onClick={() => closeSheet(true)} className="btn btn--kumkum btn--block">
             {draft.size > 0 ? `Done (${draft.size} selected)` : 'Done'}
           </button>
         </div>

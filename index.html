@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tirumala Marriage Services & Suppliers | Marriages & Events</title>
     <meta name="description" content="Complete wedding and event arrangements in Tirupati — function hall booking, accommodation, decorations, catering, purohits, Sannai Melam, photography and bridal makeup for every budget.">
-    <meta name="theme-color" content="#2C2C2C">
+    <meta name="theme-color" content="#5B0E16">
     <link rel="icon" type="image/png" href="/images/favicon.png">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Tiro Telugu (display, 400 + italic) and Mukta (text/UI, 400/500/600) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600&family=Tiro+Telugu:ital@0;1&display=swap" rel="stylesheet">
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,316 +24,25 @@
                 extend: {
                     colors: {
                         cream: '#FDFBF7',
-                        gold: '#D4AF37',
+                        ivory: '#F6EEDF',
+                        sand: '#E6D5B5',
+                        brass: '#9A8459',
+                        gold: { DEFAULT: '#D4AF37', light: '#F1D77C', readable: '#856611' },
+                        maroon: '#800000',
+                        kumkum: { DEFAULT: '#5B0E16', ink: '#2A070B' },
                         charcoal: '#2C2C2C',
+                        'ink-soft': '#5E5146',
+                        whatsapp: '#25D366',
                     },
                     fontFamily: {
-                        poppins: ['Poppins', 'sans-serif'],
+                        display: ['"Tiro Telugu"', 'Georgia', 'serif'],
+                        sans: ['Mukta', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
                     },
-                    boxShadow: {
-                        'elegant': '0 10px 30px -10px rgba(44, 44, 44, 0.05)',
-                        'elegant-hover': '0 20px 40px -10px rgba(44, 44, 44, 0.1)',
-                    }
+                    maxWidth: { container: '77.5rem' },
                 }
             }
         }
     </script>
-
-    <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #FDFBF7; color: #2C2C2C; }
-        h1, h2, h3, h4, h5, h6 { font-weight: 700; }
-        html, body { overflow-x: hidden; }
-        html { scrollbar-gutter: stable; }
-
-        /* Custom Utilities */
-        .gold-divider { width: 60px; height: 3px; background-color: #D4AF37; margin: 1rem auto; }
-        .gold-divider-left { width: 60px; height: 3px; background-color: #D4AF37; margin-top: 1rem; margin-bottom: 1rem; }
-        .text-gold { color: #D4AF37; }
-        .text-gold-readable { color: #856611; }
-        .bg-gold { background-color: #D4AF37; }
-        #enquiryForm input::placeholder, #enquiryForm textarea::placeholder { color: #6B7280; opacity: 1; }
-
-        /* Card Hover Effects */
-        .service-card { transition: all 0.3s ease; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -10px rgba(44, 44, 44, 0.1); }
-
-        /* Scroll Reveal Animation */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* Hero Entrance Animation */
-        .hero-animate { animation: heroEntrance 0.8s ease-out forwards; }
-        @keyframes heroEntrance {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Lightbox */
-        #lightbox { display: none; background: rgba(44, 44, 44, 0.95); z-index: 1000; }
-        #lightbox.active { display: flex; }
-        .gallery-grid > button:focus-visible { outline: 2px solid #856611; outline-offset: 3px; }
-
-        /* Image Overlays */
-        .img-overlay { transition: all 0.3s ease; }
-        .group:hover .img-overlay { background-color: rgba(44, 44, 44, 0.4); }
-        .group:hover .img-scale { transform: scale(1.05); }
-
-        /* ═══════════════════════════════════════════════════
-           MOBILE HERO — Full-screen fit-to-viewport
-           ─────────────────────────────────────────────────── */
-        .hero-full {
-            height: 100vh;
-            height: 100svh;
-            min-height: 580px;
-        }
-        @media (min-width: 1024px) { .hero-full { min-height: 640px; } }
-        /* Very short screens: allow content to breathe */
-        @media (max-height: 560px) {
-            .hero-full { height: auto; min-height: unset; padding-top: 80px; padding-bottom: 36px; }
-        }
-
-        /* ═══════════════════════════════════════════════════
-           EDITORIAL — disable fixed bg on touch/mobile
-           ─────────────────────────────────────────────────── */
-        @media (max-width: 1023px) {
-            .editorial-section {
-                background-attachment: scroll !important;
-                background-position: center 40% !important;
-            }
-        }
-
-        /* ═══════════════════════════════════════════════════
-           SERVICES BOTTOM SHEET
-           ─────────────────────────────────────────────────── */
-        #services-sheet-backdrop {
-            position: fixed; inset: 0;
-            background: rgba(44,44,44,0.55);
-            z-index: 200; opacity: 0; pointer-events: none;
-            transition: opacity 0.28s ease;
-            -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
-        }
-        #services-sheet-backdrop.open { opacity: 1; pointer-events: auto; }
-
-        #services-bottom-sheet {
-            position: fixed; left: 0; right: 0; bottom: 0;
-            z-index: 201; background: #fff;
-            border-radius: 20px 20px 0 0;
-            max-height: 85dvh; max-height: 85vh;
-            display: flex; flex-direction: column;
-            transform: translateY(100%);
-            transition: transform 0.32s cubic-bezier(0.32,0.72,0,1);
-            box-shadow: 0 -8px 40px rgba(44,44,44,0.18);
-        }
-        #services-bottom-sheet.open { transform: translateY(0); }
-
-        .sheet-drag-handle {
-            width: 40px; height: 4px; background: #D4AF37;
-            border-radius: 2px; margin: 12px auto 0; flex-shrink: 0;
-        }
-        #sheet-service-list {
-            overflow-y: auto; -webkit-overflow-scrolling: touch;
-            overscroll-behavior: contain;
-            flex: 1; padding: 4px 0 8px;
-        }
-        .sheet-service-item {
-            display: flex; align-items: center; gap: 14px;
-            padding: 14px 20px; cursor: pointer;
-            user-select: none; -webkit-tap-highlight-color: transparent;
-            transition: background 0.15s;
-        }
-        .sheet-service-item:active { background: rgba(212,175,55,0.08); }
-        .sheet-service-item input[type="checkbox"] {
-            width: 20px; height: 20px; accent-color: #D4AF37;
-            flex-shrink: 0; cursor: pointer;
-        }
-        .sheet-service-item span { font-size: 15px; color: #2C2C2C; cursor: pointer; line-height: 1.4; flex: 1; }
-
-        /* ═══════════════════════════════════════════════════
-           SERVICES TRIGGER (mobile compact selector button)
-           ─────────────────────────────────────────────────── */
-        #services-trigger {
-            display: none;
-            align-items: center; justify-content: space-between;
-            width: 100%; border: 1px solid #D1D5DB;
-            border-radius: 0.5rem; background: #F9FAFB;
-            padding: 12px 16px; font-size: 16px; color: #6B7280;
-            cursor: pointer; min-height: 48px; text-align: left;
-            -webkit-tap-highlight-color: transparent;
-            transition: border-color 0.2s; font-family: inherit;
-        }
-        #services-trigger:focus { outline: 2px solid #D4AF37; outline-offset: 1px; }
-
-        /* ═══════════════════════════════════════════════════
-           WHATSAPP FAB — safe area aware
-           ─────────────────────────────────────────────────── */
-        .whatsapp-fab {
-            position: fixed;
-            bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-            right: calc(20px + env(safe-area-inset-right, 0px));
-            z-index: 49;
-        }
-        @media (min-width: 768px) { .whatsapp-fab { bottom: 32px; right: 32px; } }
-
-        /* ═══════════════════════════════════════════════════
-           TOUCH: remove sticky hover states
-           ─────────────────────────────────────────────────── */
-        @media (hover: none) {
-            .service-card:hover { transform: none; box-shadow: none; }
-            .event-card p.event-desc { opacity: 1 !important; transform: translateY(0) !important; }
-            .event-card a.event-link { display: block !important; }
-        }
-
-        /* ═══════════════════════════════════════════════════
-           REDUCED MOTION
-           ─────────────────────────────────────────────────── */
-        @media (prefers-reduced-motion: reduce) {
-            .reveal, .service-card { transition: none; }
-            .hero-animate { animation: none; }
-            #services-bottom-sheet, #services-sheet-backdrop { transition: none; }
-        }
-
-        /* ═══════════════════════════════════════════════════
-           MOBILE COMPACT OVERRIDES  (<768px)
-           ─────────────────────────────────────────────────── */
-        @media (max-width: 767px) {
-            /* General Typography & Spacing */
-            #about, #services, .editorial-section, #events, .why-section, #process, #gallery, #booking, #contact { padding-top: 48px; padding-bottom: 48px; }
-            .final-cta { padding-top: 56px; padding-bottom: 56px; }
-
-
-            /* Center Mobile Content Blocks safely */
-            #about .reveal > div:last-child { display: flex; flex-direction: column; align-items: center; text-align: center; }
-            .gold-divider-left { margin-left: auto; margin-right: auto; }
-
-            /* About */
-            #about .offset-border { display: none; }
-            #about .about-img { height: 220px; border-radius: 14px; }
-            #about p.about-body { font-size: 15px; margin-bottom: 16px; }
-            #about ul.about-ul li { font-size: 15px; text-align: left; margin-bottom: 8px; }
-            #about a.border-charcoal { min-height: 44px; display: inline-flex; align-items: center; font-size: 15px; font-weight: 600; }
-
-            /* Services */
-            #services .services-grid { grid-template-columns: 1fr; gap: 16px; }
-            #services .service-card { padding: 20px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-            #services .svc-icon { width: 48px; height: 48px; margin-bottom: 12px; font-size: 18px; }
-            #services .svc-title { font-size: 18px; margin-bottom: 6px; }
-            #services .svc-desc { font-size: 14px; line-height: 1.6; }
-
-            /* Events */
-            #events .events-grid { grid-template-columns: 1fr; gap: 20px; }
-            #events .event-card-img { height: 200px; }
-            #events .event-card h3 { font-size: 20px; }
-
-            /* Why Choose Us */
-            .why-section p.why-body { font-size: 15px; margin-bottom: 24px; text-align: center; }
-            .why-section .why-images { display: none !important; }
-            .why-section .benefit-icon { width: 44px !important; height: 44px !important; font-size: 16px; }
-            .why-section h4.benefit-title { font-size: 17px; }
-            .why-section p.benefit-desc { font-size: 14px; line-height: 1.5; }
-
-            /* Process (How We Work) */
-            #process .process-grid { gap: 0 !important; }
-            .process-connector {
-                display: block; width: 2px; height: 20px;
-                background: #D4AF37; opacity: 0.3; margin-left: 43px;
-            }
-
-            /* Gallery */
-            #gallery .gallery-header { text-align: center; align-items: center; margin-bottom: 20px; }
-            #gallery p.text-xs { text-align: center; max-width: 100%; margin-top: 12px; }
-
-            /* Booking */
-            #booking .booking-inner { border-radius: 20px; }
-            #booking .booking-info { padding: 32px 20px; text-align: center; }
-            #booking .booking-info h3 { font-size: 24px; }
-            #booking .booking-info p { font-size: 15px; margin-bottom: 16px; }
-            #booking .booking-form-wrap { padding: 24px 20px; }
-            #services-trigger { display: flex; min-height: 48px; }
-
-            /* CTA Buttons in general */
-            .inline-block { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; }
-        }
-            footer .footer-grid { grid-template-columns: 1fr; gap: 20px; margin-bottom: 20px; }
-
-
-        /* ═══════════════════════════════════════════════════
-           TABLET (768–1023px)
-           ─────────────────────────────────────────────────── */
-        @media (min-width: 768px) and (max-width: 1023px) {
-            /* Navbar sidebar is enabled via lg:hidden classes in HTML */
-            /* Hero */
-            .hero-full { min-height: unset; height: auto; padding-top: 100px; padding-bottom: 60px; }
-            /* About */
-            #about { padding-top: 60px; padding-bottom: 60px; }
-            #about .offset-border { display: none; }
-            #about .about-ul li { font-size: 15px; }
-            /* Services */
-            #services { padding-top: 60px; padding-bottom: 60px; }
-            #services .services-grid { grid-template-columns: repeat(2,1fr); gap: 24px; }
-            #services .service-card { padding: 28px; }
-            /* Events */
-            #events { padding-top: 60px; padding-bottom: 60px; }
-            #events .events-grid { grid-template-columns: repeat(2,1fr); gap: 24px; }
-            #events .event-card-img { height: 240px; }
-            /* Why Choose Us */
-            .why-section { padding-top: 60px; padding-bottom: 60px; }
-            .why-section .why-images { display: grid !important; grid-template-columns: repeat(2,1fr); gap: 24px; }
-            /* How We Work */
-            #process { padding-top: 60px; padding-bottom: 60px; }
-            #process .process-grid { grid-template-columns: repeat(2,1fr); gap: 24px; }
-            .process-connector { display: none !important; }
-            /* Gallery */
-            #gallery { padding-top: 60px; padding-bottom: 60px; }
-            /* Booking */
-            #booking { padding-top: 60px; padding-bottom: 60px; }
-            #booking .booking-inner { flex-direction: column; }
-            #booking .booking-info { width: 100%; padding: 40px; text-align: center; }
-            #booking .booking-form-wrap { width: 100%; padding: 40px; }
-            /* Contact */
-            #contact { padding-top: 60px; padding-bottom: 60px; }
-            #contact .contact-map { height: 320px; }
-            /* Footer */
-            footer { padding-top: 60px; padding-bottom: 40px; }
-            footer .footer-grid { grid-template-columns: repeat(2,1fr); gap: 32px; }
-        }
-
-        /* ═══════════════════════════════════════════════════
-           TYPOGRAPHY REFINEMENT & ANIMATED MENU
-           ─────────────────────────────────────────────────── */
-        /* Animated Hamburger */
-        #mobile-menu-btn.open span:nth-child(1) { transform: translateY(0) rotate(45deg); }
-        #mobile-menu-btn.open span:nth-child(2) { opacity: 0; transform: scale(0); }
-        #mobile-menu-btn.open span:nth-child(3) { transform: translateY(0) rotate(-45deg); }
-
-        /* Global Section Headings */
-        section h2:not(.hero-full h2), .final-cta h2 {
-            font-size: 34px !important;
-            font-weight: 600 !important;
-            line-height: 1.3 !important;
-            margin-bottom: 16px !important;
-        }
-        @media (max-width: 1023px) {
-            section h2:not(.hero-full h2), .final-cta h2 {
-                font-size: 28px !important;
-            }
-        }
-        @media (max-width: 767px) {
-            section h2:not(.hero-full h2), .final-cta h2 {
-                font-size: 24px !important;
-                margin-bottom: 12px !important;
-            }
-        }
-        /* Card Titles */
-        .service-card h3, .svc-title, .event-card h3, .benefit-title, .process-card-new h4, .process-card h4 {
-            font-size: 18px !important;
-            font-weight: 600 !important;
-        }
-        @media (max-width: 767px) {
-            .service-card h3, .svc-title, .event-card h3, .benefit-title, .process-card-new h4, .process-card h4 {
-                font-size: 17px !important;
-            }
-        }
-    </style>
 </head>
 <body class="antialiased overflow-x-hidden text-charcoal bg-cream">
     <div id="root"></div>

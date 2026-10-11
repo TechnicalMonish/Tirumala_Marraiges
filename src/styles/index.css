@@ -1,0 +1,13 @@
+/* Tirumala — premium redesign stylesheet entry.
+   Split by concern so each file stays readable. Vite inlines the imports. */
+@import './base.css';
+@import './ornaments.css';
+@import './buttons.css';
+@import './nav.css';
+@import './hero.css';
+@import './sections.css';
+@import './about.css';
+@import './gallery.css';
+@import './booking.css';
+@import './contact-footer.css';
+@import './motion.css';

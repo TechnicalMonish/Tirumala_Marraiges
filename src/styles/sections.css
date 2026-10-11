@@ -1,0 +1,100 @@
+/* ── Section heads ─────────────────────────────────────── */
+.section-head { margin-bottom: clamp(2.75rem, 1.6rem + 3.2vw, 4.75rem); }
+.section-head--center { text-align: center; }
+.section-head .h-display { color: var(--kumkum); }
+.section-head .caption-rule { margin-top: 20px; }
+.on-dark .section-head .h-display { color: var(--cream); }
+
+/* ── Services: ruled programme, not cards ──────────────── */
+.programme { display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--sand); }
+.programme__item { display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: start; padding: 26px 2px; border-bottom: 1px solid var(--sand); }
+.programme__title { position: relative; padding-bottom: 12px; color: var(--kumkum); }
+.programme__title::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 32px; height: 1px; background: var(--gold);
+  transition: width .6s var(--ease-out);
+}
+.programme__desc { margin-top: 10px; color: var(--ink-soft); font-size: 15.5px; line-height: 1.7; }
+.programme__item:hover .niche, .programme__item:focus-within .niche { background: var(--kumkum); border-color: var(--kumkum); color: var(--gold-light); }
+.programme__item:hover .programme__title::after { width: 76px; }
+@media (min-width: 768px) { .programme { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px; } }
+@media (min-width: 1024px) {
+  .programme { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 0; border-bottom: 1px solid var(--sand); }
+  .programme__item { grid-template-columns: 1fr; gap: 22px; padding: 46px 40px 50px; border-bottom: 0; }
+  .programme__item:nth-child(3n+2), .programme__item:nth-child(3n) { border-left: 1px solid var(--sand); }
+  .programme__item:nth-child(-n+3) { border-bottom: 1px solid var(--sand); }
+}
+
+/* ── Editorial band (overlay stays bg-black/45) ────────── */
+@media (max-width: 1023px) {
+  .editorial-section { background-attachment: scroll !important; background-position: center 40% !important; }
+}
+.editorial-section { padding-block: clamp(6rem, 3.5rem + 8vw, 11rem); }
+.editorial__title { color: var(--cream); text-shadow: var(--ts-hero-strong); }
+.editorial__title em { display: block; font-style: italic; }
+.editorial__copy { margin: 22px auto 0; max-width: 40rem; color: rgb(253 251 247 / .94); font-size: clamp(1.05rem, .98rem + .4vw, 1.3rem); line-height: 1.6; text-shadow: var(--ts-hero); }
+
+/* ── Events: arch-topped occasions, photos at full brightness ── */
+.occasions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 16px; }
+@media (min-width: 768px) { .occasions { gap: 52px 32px; } }
+@media (min-width: 1024px) { .occasions { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 68px 44px; } }
+.occasion__frame { position: relative; padding: 7px 7px 0; }
+.occasion__frame::before {
+  content: ""; position: absolute; inset: 0; border: solid var(--gold); border-width: 1px 1px 0 1px;
+  border-radius: 9999px 9999px 0 0; opacity: 0; transition: opacity .5s var(--ease-out);
+}
+.occasion__media { aspect-ratio: 3 / 4; }
+.occasion__media img { transition: transform 1s var(--ease-out); }
+.occasion:hover .occasion__frame::before { opacity: 1; }
+.occasion:hover .occasion__media img { transform: scale(1.04); }
+.occasion__title { margin-top: 18px; color: var(--kumkum); font-size: clamp(1.12rem, .95rem + .8vw, 1.65rem); line-height: 1.2; }
+.occasion__desc { margin-top: 6px; color: var(--ink-soft); font-size: clamp(.9rem, .86rem + .2vw, 1rem); line-height: 1.55; }
+.occasion .link-caps { margin-top: 2px; }
+@media (max-width: 479px) { .occasion .link-caps { font-size: .72rem; letter-spacing: .12em; } }
+
+/* ── Why Choose Us: kumkum band ────────────────────────── */
+.why { padding-top: 0; }
+.why > .zari { margin-bottom: var(--band-pad); }
+.why__grid { display: grid; gap: 64px; align-items: center; }
+@media (min-width: 1024px) { .why__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 88px; } }
+.why__body { margin-top: 26px; color: rgb(253 251 247 / .84); }
+.benefits { margin-top: 36px; border-top: 1px solid rgb(212 175 55 / .3); }
+.benefit { display: flex; gap: 20px; padding: 24px 0; border-bottom: 1px solid rgb(212 175 55 / .3); }
+.benefit__title { color: var(--gold-light); }
+.benefit__desc { margin-top: 6px; color: rgb(253 251 247 / .8); font-size: 15.5px; }
+.why__art { position: relative; width: min(100%, 520px); margin-inline: auto; }
+.why__art .arch-frame--tall { width: 74%; margin: 26px 26px 26px auto; }
+.why__art .arch-frame--tall .arch-media { aspect-ratio: 3 / 4.1; }
+.why__inset { position: absolute; left: 0; bottom: 0; width: 42%; padding: 6px; border-radius: 9999px 9999px 6px 6px; background: var(--kumkum); box-shadow: 0 0 0 1px rgb(241 215 124 / .7), 0 24px 40px -22px rgb(0 0 0 / .6); }
+.why__inset .arch-media { aspect-ratio: 3 / 4; }
+@media (max-width: 767px) { .why__inset { display: none; } .why__art .arch-frame--tall { width: auto; max-width: 300px; margin: 26px auto; } }
+
+/* ── Process: kolam-node timeline ──────────────────────── */
+.steps { position: relative; display: grid; padding-left: 40px; }
+.steps::before { content: ""; position: absolute; left: 11px; top: 10px; bottom: 30px; width: 1px; background: var(--gold); opacity: .7; }
+.step { position: relative; padding-bottom: 40px; }
+.step:last-child { padding-bottom: 0; }
+.step__node { position: absolute; left: -40px; top: 2px; width: 23px; height: 23px; background: var(--cream); color: var(--gold); }
+.step__num { font-family: var(--font-display); font-size: clamp(2.4rem, 2rem + 1.4vw, 3.4rem); line-height: 1; color: var(--gold-readable); }
+.step__title { margin-top: 10px; color: var(--kumkum); }
+.step__desc { margin-top: 10px; color: var(--ink-soft); font-size: 15.5px; max-width: 34ch; }
+@media (min-width: 768px) {
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 48px; padding-left: 0; }
+  .steps::before { display: none; }
+  .step { padding: 0; }
+  .step__node { position: static; display: block; margin-bottom: 20px; }
+}
+@media (min-width: 1024px) {
+  .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; }
+  .steps::before { display: block; left: 0; right: 0; top: 11px; bottom: auto; width: auto; height: 1px; }
+  .step__node { margin-bottom: 30px; box-shadow: 0 0 0 8px var(--cream); }
+}
+
+/* ── Final CTA: kumkum band with zari edges ────────────── */
+.final { position: relative; overflow: hidden; padding-block: 0; text-align: center; }
+.final__inner { position: relative; padding-block: clamp(5rem, 3rem + 7vw, 9.5rem); }
+.final__art { position: absolute; left: 50%; top: 14%; bottom: -1px; width: min(820px, 130vw); transform: translateX(-50%); pointer-events: none; }
+.final__art::before, .final__art::after { content: ""; position: absolute; inset: 0; border-radius: 9999px 9999px 0 0; border: solid rgb(241 215 124 / .2); border-width: 1px 1px 0 1px; }
+.final__art::after { inset: -22px -22px 0 -22px; border-style: dotted; border-width: 2px 2px 0 2px; border-color: rgb(241 215 124 / .16); }
+.final__copy { margin: 24px auto 0; max-width: 38rem; color: rgb(253 251 247 / .82); font-size: clamp(1.02rem, .98rem + .3vw, 1.2rem); }
+.final__actions { margin-top: 36px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 14px; }
+@media (max-width: 479px) { .final__actions .btn { width: 100%; } }

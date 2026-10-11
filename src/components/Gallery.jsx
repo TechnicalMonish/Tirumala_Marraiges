@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Reveal from './Reveal.jsx';
-import { GALLERY } from '../data.js';
+import Photo from './Photo.jsx';
+import { GALLERY, IMG_SIZE } from '../data.js';
 import { useOverlayLock } from '../OverlayContext.jsx';
 import { img, cn } from '../utils.js';
+import { CaptionRule } from './Ornaments.jsx';
 
 const spanClass = {
   feature: 'lg:col-span-2 lg:row-span-2',
@@ -56,41 +58,32 @@ export default function Gallery() {
   };
 
   const current = open ? GALLERY[openIndex] : null;
+  const [cw, ch] = current ? IMG_SIZE[current.image] || [] : [];
 
   return (
-    <section id="gallery" className="py-10 lg:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Reveal className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gallery-header">
+    <section id="gallery" className="band band--cream">
+      <div className="container-x">
+        <Reveal className="gallery-head">
           <div>
-            <span className="text-gold-readable tracking-widest text-sm font-semibold uppercase">Event Gallery</span>
-            <h2 className="font-bold text-4xl text-charcoal mt-2">Beautiful Moments &amp; Celebrations</h2>
+            <h2 className="h-display t-h2 text-kumkum">Beautiful Moments &amp; Celebrations</h2>
+            <CaptionRule label="Event Gallery" align="start" className="mt-5" />
           </div>
-          <p className="text-xs text-gray-500 mt-4 md:mt-0 max-w-xs md:text-right italic">
-            *Images are illustrative representations of our service quality.
-          </p>
+          <p className="gallery-note">*Images are illustrative representations of our service quality.</p>
         </Reveal>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 auto-rows-[140px] md:auto-rows-[180px] lg:auto-rows-[200px] gallery-grid">
+        <div className="gallery-grid">
           {GALLERY.map((g, i) => (
             <button
-              key={i}
+              key={g.image}
               type="button"
               aria-label={`View ${g.alt}`}
               onClick={(e) => { openerRef.current = e.currentTarget; setOpenIndex(i); }}
-              className={cn(
-                'relative group overflow-hidden rounded-xl lg:rounded-2xl cursor-pointer shadow-sm',
-                spanClass[g.span]
-              )}
+              className={cn('tile', spanClass[g.span])}
             >
-              <img
-                src={img(g.image)}
-                alt={g.alt}
-                className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-charcoal/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                <i className="fas fa-search-plus text-white text-3xl" aria-hidden="true" />
-              </div>
+              <Photo name={g.image} alt={g.alt} />
+              <span className="tile__veil" aria-hidden="true">
+                <i className="fas fa-up-right-and-down-left-from-center" />
+              </span>
             </button>
           ))}
         </div>
@@ -103,41 +96,27 @@ export default function Gallery() {
         aria-modal={open ? 'true' : 'false'}
         aria-hidden={open ? 'false' : 'true'}
         aria-label="Event gallery image viewer"
-        className={cn('fixed inset-0 items-center justify-center', open && 'active')}
+        className={cn(open && 'active')}
         onClick={(e) => { if (e.target === e.currentTarget) close(); }}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
-        <button
-          ref={closeBtnRef}
-          type="button"
-          aria-label="Close gallery"
-          onClick={close}
-          className="absolute top-6 right-8 text-white text-4xl hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-        >
-          &times;
+        <button ref={closeBtnRef} type="button" aria-label="Close gallery" onClick={close} className="lb__btn lb__close">
+          <i className="fas fa-xmark" aria-hidden="true" />
         </button>
-        <button
-          type="button"
-          aria-label="Previous image"
-          onClick={prev}
-          className="absolute left-4 md:left-8 text-white text-3xl hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-        >
+        <button type="button" aria-label="Previous image" onClick={prev} className="lb__btn lb__prev">
           <i className="fas fa-chevron-left" aria-hidden="true" />
         </button>
         {current && (
-          <img
-            src={img(current.image)}
-            alt={current.alt}
-            className="max-h-[90vh] max-w-[90vw] object-contain rounded-md shadow-2xl"
-          />
+          <figure className="lb__figure">
+            <img src={img(current.image)} alt={current.alt} width={cw} height={ch} className="lb__img" />
+            <figcaption className="lb__caption">
+              <p>{current.alt}</p>
+              <span className="lb__count" aria-live="polite">{openIndex + 1} / {GALLERY.length}</span>
+            </figcaption>
+          </figure>
         )}
-        <button
-          type="button"
-          aria-label="Next image"
-          onClick={next}
-          className="absolute right-4 md:right-8 text-white text-3xl hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-        >
+        <button type="button" aria-label="Next image" onClick={next} className="lb__btn lb__next">
           <i className="fas fa-chevron-right" aria-hidden="true" />
         </button>
       </div>
