@@ -1,5 +1,6 @@
-/* Tirumala — premium redesign stylesheet entry.
-   Split by concern so each file stays readable. Vite inlines the imports. */
+/* Stylesheet entry. Site styles are split by concern and inlined by Vite.
+   Tailwind's layers come last so its preflight and utilities win over site
+   rules of equal specificity; the design depends on that order. */
 @import './base.css';
 @import './ornaments.css';
 @import './buttons.css';
@@ -12,3 +13,7 @@
 @import './contact-footer.css';
 @import './legal.css';
 @import './motion.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

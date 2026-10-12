@@ -1,9 +1,15 @@
-node_modules
-dist
-.DS_Store
-*.log
-# Internal workflow docs and the original-index backup
-.agents/
+# Dependencies
+node_modules/
 
-# Backup copy of raw images; served copies live in public/images/
-/images/
+# Build output and Vite cache
+dist/
+.vite/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Local tooling (not part of the project)
+.agents/

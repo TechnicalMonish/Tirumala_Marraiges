@@ -1,58 +1,58 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <!-- Core -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2C2C2C">
 
-    <!-- Primary SEO
-         Keep in sync with src/data.js SITE_URL -->
-    <title>Tirumala Marriage Service &amp; Suppliers | Tirumala &amp; Tirupati Since 1991</title>
-    <meta name="description" content="Wedding planning, event management and Vedic ceremonies across Tirumala and Tirupati since 1991 — venues, catering, decor, Purohits and complete arrangements.">
+    <!-- Primary SEO (absolute URLs are completed at build time from the site URL in vite.config.js) -->
+    <title>Tirumala Marriage Service &amp; Suppliers | Tirupati, Since 1991</title>
+    <meta name="description" content="Wedding planning, event management and Vedic ceremonies in Tirumala and Tirupati since 1991. Venues, catering, decor, Purohits and complete arrangements.">
     <meta name="keywords" content="wedding planning Tirupati, marriage services Tirupati, event management, Vedic ceremonies, Upanayanam, Namakaranam, function hall booking, Tirumala Marriage Service &amp; Suppliers">
     <meta name="author" content="Tirumala Marriage Service &amp; Suppliers">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://demo.ramsstudio.in/tirumala/">
+    <link rel="canonical" href="%SITE_URL%/">
 
-    <!-- Preconnects (fonts + CDNs the runtime pulls) -->
+    <!-- Preconnects -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="64x64" href="/images/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 
-    <!-- Open Graph
-         Keep in sync with src/data.js SITE_URL -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Tirumala Marriage Service &amp; Suppliers">
     <meta property="og:locale" content="en_IN">
-    <meta property="og:title" content="Tirumala Marriage Service &amp; Suppliers | Tirumala &amp; Tirupati Since 1991">
-    <meta property="og:description" content="Wedding planning, event management and Vedic ceremonies across Tirumala and Tirupati since 1991 — venues, catering, decor, Purohits and complete arrangements.">
-    <meta property="og:url" content="https://demo.ramsstudio.in/tirumala/">
-    <meta property="og:image" content="https://demo.ramsstudio.in/tirumala/og-image.png">
+    <meta property="og:title" content="Tirumala Marriage Service &amp; Suppliers | Tirupati, Since 1991">
+    <meta property="og:description" content="Wedding planning, event management and Vedic ceremonies in Tirumala and Tirupati since 1991. Venues, catering, decor, Purohits and complete arrangements.">
+    <meta property="og:url" content="%SITE_URL%/">
+    <meta property="og:image" content="%SITE_URL%/images/og-image.jpg">
+    <meta property="og:image:secure_url" content="%SITE_URL%/images/og-image.jpg">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Tirumala Marriage Service &amp; Suppliers — Tirumala &amp; Tirupati, Since 1991. Trusted by generations, chosen for prestigious celebrations.">
+    <meta property="og:image:alt" content="Tirumala Marriage Service &amp; Suppliers — Since 1991 · Tirumala &amp; Tirupati">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Tirumala Marriage Service &amp; Suppliers | Tirumala &amp; Tirupati Since 1991">
-    <meta name="twitter:description" content="Wedding planning, event management and Vedic ceremonies across Tirumala and Tirupati since 1991 — venues, catering, decor, Purohits and complete arrangements.">
-    <meta name="twitter:image" content="https://demo.ramsstudio.in/tirumala/og-image.png">
-    <meta name="twitter:image:alt" content="Tirumala Marriage Service &amp; Suppliers — Tirumala &amp; Tirupati, Since 1991. Trusted by generations, chosen for prestigious celebrations.">
+    <meta name="twitter:title" content="Tirumala Marriage Service &amp; Suppliers | Tirupati, Since 1991">
+    <meta name="twitter:description" content="Wedding planning, event management and Vedic ceremonies in Tirumala and Tirupati since 1991. Venues, catering, decor, Purohits and complete arrangements.">
+    <meta name="twitter:image" content="%SITE_URL%/images/og-image.jpg">
+    <meta name="twitter:image:alt" content="Tirumala Marriage Service &amp; Suppliers — Since 1991 · Tirumala &amp; Tirupati">
 
-    <!-- Structured data: LocalBusiness (schema.org/WeddingPlanner falls back to LocalBusiness) -->
+    <!-- Structured data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "@id": "https://demo.ramsstudio.in/tirumala/#business",
+      "@id": "%SITE_URL%/#business",
       "name": "Tirumala Marriage Service & Suppliers",
-      "url": "https://demo.ramsstudio.in/tirumala/",
-      "image": "https://demo.ramsstudio.in/tirumala/og-image.png",
+      "url": "%SITE_URL%/",
+      "image": "%SITE_URL%/images/og-image.jpg",
+      "logo": "%SITE_URL%/images/venkateswara-emblem.png",
       "telephone": "+917013099397",
       "email": "tirumala.marriage1991@gmail.com",
       "address": {
@@ -98,36 +98,8 @@
     <!-- Google Fonts: Tiro Telugu (display, 400 + italic) and Mukta (text/UI, 400/500/600) -->
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600&family=Tiro+Telugu:ital@0;1&display=swap" rel="stylesheet">
 
-    <!-- FontAwesome -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Tailwind CSS (CDN runtime — matches original) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cream: '#FDFBF7',
-                        ivory: '#F6EEDF',
-                        sand: '#E6D5B5',
-                        brass: '#9A8459',
-                        gold: { DEFAULT: '#D4AF37', light: '#F1D77C', readable: '#856611' },
-                        maroon: '#800000',
-                        kumkum: { DEFAULT: '#5B0E16', ink: '#2A070B' },
-                        charcoal: '#2C2C2C',
-                        'ink-soft': '#5E5146',
-                        whatsapp: '#25D366',
-                    },
-                    fontFamily: {
-                        display: ['"Tiro Telugu"', 'Georgia', 'serif'],
-                        sans: ['Mukta', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
-                    },
-                    maxWidth: { container: '77.5rem' },
-                }
-            }
-        }
-    </script>
 </head>
 <body class="antialiased overflow-x-hidden text-charcoal bg-cream">
     <div id="root"></div>

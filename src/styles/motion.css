@@ -1,4 +1,4 @@
-/* ── Hero darshan reveal (the one authored moment) ─────── */
+/* ── Hero entrance animation ───────────────────────────── */
 @keyframes heroSettle { from { transform: scale(1.06); } to { transform: scale(1); } }
 @keyframes archRise { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

@@ -1,5 +1,0 @@
-# Keep in sync with src/data.js SITE_URL
-User-agent: *
-Allow: /
-
-Sitemap: https://demo.ramsstudio.in/tirumala/sitemap.xml

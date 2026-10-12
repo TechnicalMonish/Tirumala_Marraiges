@@ -24,7 +24,7 @@
   .programme__item:nth-child(-n+3) { border-bottom: 1px solid var(--sand); }
 }
 
-/* ── Editorial band (overlay stays bg-black/45) ────────── */
+/* ── Editorial band (single bg-black/45 overlay) ───────── */
 @media (max-width: 1023px) {
   .editorial-section { background-attachment: scroll !important; background-position: center 40% !important; }
 }
