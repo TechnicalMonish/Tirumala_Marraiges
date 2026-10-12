@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 // Default production origin, used when neither environment variable is set.
-const DEFAULT_SITE_URL = 'https://tirumalamarraiges.vercel.app';
+const DEFAULT_SITE_URL = 'https://www.tirumalamarriages.in';
 
 /**
  * Public origin of the site (no trailing slash). First match wins:
@@ -15,7 +15,7 @@ function resolveSiteUrl(env) {
     env.SITE_URL ||
     (env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}` : DEFAULT_SITE_URL);
   const siteUrl = candidate.trim().replace(/\/+$/, '');
-  if (!/^https?:\/\/[^/\s]+$/.test(siteUrl)) {
+  if (!/^https?:\/\/[A-Za-z0-9.-]+(:\d+)?$/.test(siteUrl)) {
     throw new Error(`SITE_URL must be an origin such as https://www.example.com (received "${candidate}").`);
   }
   return siteUrl;

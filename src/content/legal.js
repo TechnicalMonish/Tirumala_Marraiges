@@ -58,7 +58,7 @@ export const PRIVACY_POLICY = {
       heading: 'Third-Party Services (Maps, Fonts, Icons, WhatsApp)',
       paragraphs: [
         'Our Contact section embeds a Google Maps preview of our office location. When this preview loads, Google may receive your IP address and basic browser information, under Google\'s own privacy terms.',
-        'The site also loads Google Fonts, Font Awesome icons and the Tailwind CDN runtime from third-party content delivery networks. These providers may similarly receive standard request metadata.',
+        'The site also loads Google Fonts and Font Awesome icons from third-party content delivery networks. These providers may similarly receive standard request metadata.',
         'Clicking a WhatsApp link opens WhatsApp (web or app) in a new tab or window and is governed by WhatsApp\'s own privacy terms.',
       ],
     },
